@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-08-12 07:29:46
+-- 產生時間： 2025-08-12 10:01:57
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -24,10 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `users`
+-- 資料表結構 `admin`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `admin` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `acc` text NOT NULL,
+  `pw` text NOT NULL,
+  `pr` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `admin`
+--
+
+INSERT INTO `admin` (`id`, `acc`, `pw`, `pr`) VALUES
+(1, 'admin', '1234', '');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `user`
+--
+
+CREATE TABLE `user` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` text NOT NULL,
   `acc` text NOT NULL,
@@ -39,13 +59,26 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- 傾印資料表的資料 `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `acc`, `pw`, `tel`, `addr`, `email`, `regdate`) VALUES
+(2, '王小明', 'test', '1234', '0911111111', 'testaddr', 'test@test.com', '2025-08-12');
+
+--
 -- 已傾印資料表的索引
 --
 
 --
--- 資料表索引 `users`
+-- 資料表索引 `admin`
 --
-ALTER TABLE `users`
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 資料表索引 `user`
+--
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -53,10 +86,16 @@ ALTER TABLE `users`
 --
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `users`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `admin`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `admin`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
