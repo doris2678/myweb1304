@@ -1,3 +1,4 @@
+
 <h2>第一次購物</h2>
 <a href="?do=reg">
     <img src="./icon/0413.jpg" alt="">
@@ -17,7 +18,31 @@
     <tr>
         <td class="tt ct">驗證碼</td>
         <td class="pp">
-          <input type="text" name="chk" id="chk"></td>
+        <?php
+          $a=rand(10,99);
+          $b=rand(10,99);
+          $_SESSION['ans']=$a+$b;      
+          echo $a." + ".$b." = ";            
+        ?>
+         <input type="text" name="chk" id="chk"></td>
     </tr>
 </table>
-<div class="ct"><button>確認</button></div>
+<div class="ct" onclick="login()"><button>確認</button></div>
+
+<script>
+  function login(){
+    let chk=$("#chk").val();
+    $.get("./api/chkAns.php",{chk},(res)=>{
+     if(parseInt(res)==1){
+       $.get("./api/chkPw.php",{acc:$('#acc').val(),pw:$('#pw').val()},()=>{
+        location.href="?";             
+       })            
+     }else{
+        alert("對不起，你輸入的驗證碼有誤，請重新登入");
+     }
+    })
+  }
+
+
+
+</script>
