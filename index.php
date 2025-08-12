@@ -22,7 +22,7 @@
                 <a href="?do=login">會員登入</a> |
                 <a href="?do=admin">管理登入</a>
            </div>
-               <marquee>&nbsp;&nbsp;&nbsp;年終特賣會開跑了 情人節特惠活動 &nbsp;&nbsp;&nbsp;</marquee>
+               <marquee>年終特賣會開跑了&nbsp;&nbsp;情人節特惠活動 &nbsp;&nbsp;</marquee>
            </div>
         <div id="left" class="ct">
         	<div style="min-height:400px;">
