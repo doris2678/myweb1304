@@ -145,5 +145,6 @@ private function arraytosql($array){
 $User=new DB('user');
 $Admin=new DB('admin');
 $Type=new DB('type');
+$Bot=new DB('bot');
 
 ?>
