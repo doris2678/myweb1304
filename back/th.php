@@ -43,7 +43,53 @@
      endforeach;
    ?>
 </table>
+<script>
+getBigs();
 
+  function addBig(){
+    let name=$('#big').val();
+    $.post('./api/save_type.php',{name,big_id:0},()=>{
+      getBigs();
+      })  
+    }
+
+  function addMid(){
+    let name=$('#mid').val();
+    let big_id=$('#selBig').val();    
+    $.post('./api/save_type.php',{name,big_id},()=>{
+        location.reload();
+      })  
+    }   
+
+   function getBigs(){
+     $.get('./api/get_bigs.php',(options)=>{        
+        $('#selBig').html(options);
+     })
+   } 
+
+$('.del-btn').on('click',function(){
+   let id=$(this).data('id');
+   if(confirm('確定要刪除這筆分纇資料嗎?')){
+    $.post("./api/del.php",{id,table:'Type'},()=>{
+      location.reload();
+    });
+   }
+ })
+
+ $('.edit-btn').on('click',function(){
+    let id=$(this).data('id');
+    let name=$(this).parent().prev().text();
+    let newName=prompt("請輸入新的分類名稱",name);
+    //console.log(newName);
+    if(newName!=null){
+      $.post('./api/save_type.php',{id,name:newName},()=>{
+        $(this).parent().prev().text(newName);
+        //location.reload();
+      })  
+    }
+
+ })
+</script>
 <h2 class="ct">商品管理</h2>
 <div class="ct">
     <button onclick="location.href='?do=add_item'">新增商品</button>
@@ -66,69 +112,23 @@
          <td><?=$item['stock'];?></td>
          <td>
           <?php
-           echo ($item['sh']==1)?"販售中":"已下架";
+           echo ($item['sh'] == 1)? "販售中" : "已下架";
           ?>         
          </td>       
          <td>
-            <button data-id="<?=$item['id'];?> class='edit-btn'">修改</button>
-            <button data-id="<?=$item['id'];?> class='del-btn'">刪除</button>
-            <button data-id="<?=$item['id'];?> class='up-btn'">上架</button>
-            <button data-id="<?=$item['id'];?> class='down-btn'">下架</button>
+            <button data-id="<?=$item['id'];?>" class='edit-btn2'>修改</button>
+            <button data-id="<?=$item['id'];?>" class='del-btn2'>刪除</button>
+            <button data-id="<?=$item['id'];?>" class='up-btn'>上架</button>
+            <button data-id="<?=$item['id'];?>" class='down-btn'>下架</button>
         </td>
     </tr>
     <?php endforeach;?>
 </table>
 
-<script>
-  getBigs();
-
-  function addBig(){
-    let name=$('#big').val();
-    $.post('./api/save_type.php',{name,big_id:0},()=>{
-      getBigs();
-      })  
-    }
-
-  function addMid(){
-    let name=$('#mid').val();
-    let big_id=$('#selBig').val();    
-    $.post('./api/save_type.php',{name,big_id},()=>{
-        location.reload();
-      })  
-    }
-   
-
-   function getBigs(){
-     $.get('./api/get_bigs.php',(options)=>{        
-        $('#selBig').html(options);
-     })
-   } 
-
-$('.del-btn').on('click',function(){
+<script> 
+ $('.del-btn2').on('click',function(){
    let id=$(this).data('id');
-   if(confirm('確定要刪除要刪除這筆分纇資料嗎?')){
-    $.post("./api/del.php",{id,table:'Type'},()=>{
-      location.reload();
-    });
-   }
- })
-
- $('.edit-btn').on('click',function(){
-    let id=$(this).data('id');
-    let name=$(this).parent().prev().text();
-    let newName=prompt("請輸入新的分類名稱",name);
-    //console.log(newName);
-    if(newName!=null){
-      $.post('./api/save_type.php',{id,name:newName},()=>{
-        $(this).parent().prev().text(newName);
-      })  
-    }
-
- })
-
- $('.del-btn').on('click',function(){
-   let id=$(this).data('id');
-   if(confirm('確定要刪除要刪除這筆商品資料嗎?')){
+   if(confirm('確定要刪除這筆商品資料嗎?')){
     $.post("./api/del.php",{id,table:'Item'},()=>{
       location.reload();
     });
@@ -148,9 +148,14 @@ $('.del-btn').on('click',function(){
       break;  
   }
   $.post('./api/sw.php',{id,sh},()=>{
-     $(this).parent().prev().text(sh==1?"販售中":"已下架");
+     //location.reload();
+     $(this).parent().prev().text(sh == 1? "販售中" : "已下架");
   }) 
+ })
 
+ $('.edit-btn2').on('click',function(){
+   let id=$(this).data('id');
+   location.href=`?do=edit_item&id=${id}`;
  })
 
 </script>

@@ -56,15 +56,15 @@
     getBigs();   
 
     function getBigs(){
-    $.get('./api/get_bigs.php',(options)=>{        
-      $('#big').html(options);
+    $.get('./api/get_bigs.php',(bigs)=>{        
+      $('#big').html(bigs);
       getMids();
     })
    } 
 
    function getMids(){
-     let big_id=$('#big').val();
-      $.get('./api/get_mids.php',{big_id}, (mids)=>{     
+     let bigId=$('#big').val();
+      $.get('./api/get_mids.php',{bigId}, (mids)=>{     
         $('#mid').html(mids);
       })
    }
