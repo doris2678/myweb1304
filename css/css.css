@@ -97,10 +97,15 @@ input[type=text],input[type=password]
 {
 	width:170px;
 }
-#left .s a
+.s
 {
 	display:none;
 }
+#left .s a
+{
+	background: lightgreen;
+}
+
 div.ww:hover > div.s
 {
 	display:block;
