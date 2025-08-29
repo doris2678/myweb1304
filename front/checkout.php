@@ -3,7 +3,7 @@ $user=$User->find(['acc'=>$_SESSION['login']]);
 ?>
 
 <h2 class="ct">填寫資料</h2>
-
+<form action="./api/save_order.php" id="orderForm" method="post">
 <table class="all">
     <tr>
         <td class="tt ct">登入帳號</td>
@@ -11,19 +11,19 @@ $user=$User->find(['acc'=>$_SESSION['login']]);
     </tr>
     <tr>
         <td class="tt ct">姓名</td>
-        <td class="pp"><input type="text" name="name" value="<?=$user['name'];?>"></td>
+        <td class="pp"><input type="text" name="name" id="name" value="<?=$user['name'];?>"></td>
     </tr>
     <tr>
         <td class="tt ct">電子信箱</td>
-        <td class="pp"><input type="text" name="email" value="<?=$user['email'];?>"></td>
+        <td class="pp"><input type="text" name="email" id="email" value="<?=$user['email'];?>"></td>
     </tr>
     <tr>
         <td class="tt ct">聯絡地址</td>
-        <td class="pp"><input type="text" name="addr" value="<?=$user['addr'];?>"></td>
+        <td class="pp"><input type="text" name="addr" id="addr" value="<?=$user['addr'];?>"></td>
     </tr>
     <tr>
         <td class="tt ct">聯絡電話</td>
-        <td class="pp"><input type="text" name="tel" value="<?=$user['tel'];?>"></td>
+        <td class="pp"><input type="text" name="tel" id="tel" value="<?=$user['tel'];?>"></td>
     </tr>
 </table>
 
@@ -53,3 +53,17 @@ $user=$User->find(['acc'=>$_SESSION['login']]);
      ?>
 </table>
 <div class="all tt ct">總價<?=$sum;?></div>
+<input type="hidden" name="total" value="<?=$sum;?>">
+<div class="ct">
+    <input type="button" value="確定送出" onclick="submitForm()">
+    <input type="button" value="返回修改訂單" onclick="location.href='?do=buycart'">
+</div>
+
+</form>
+<script>
+ function submitForm(){
+    alert("訂購成功\n感謝您的選購");
+    $("#orderForm").submit();        
+ }
+
+</script>
