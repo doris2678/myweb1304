@@ -65,6 +65,17 @@ $user=$User->find(['acc'=>$_SESSION['login']]);
 
 // $("#orderForm").on("submit",function(e){
 //     e.preventDefault();
+//     let form=new FormData(document.getElementById("orderForm"));
+//     let data=Object.fromEntries(form.entries())
+//     $.post('./api/save_order.php',data,()=>{
+//       alert("訂購成功\n感謝你的選購")
+//       location.href="?"
+//     })
+// })
+
+
+// $("#orderForm").on("submit",function(e){
+//     e.preventDefault();
 //     alert("訂購成功\n感謝你的選購")
 //     $("#orderForm").submit();
 // })
